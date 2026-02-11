@@ -34,8 +34,8 @@ function Footer() {
           <div className="footer-section">
             <h4>Contact</h4>
             <ul>
-              <li><i className="fas fa-phone"></i> +27 (0)XX XXX XXXX</li>
-              <li><i className="fas fa-envelope"></i> info@eongeneralsupply.co.za</li>
+              <li><i className="fas fa-phone"></i> +27 82 891 2818</li>
+              <li><i className="fas fa-envelope"></i> eongeneral01@gmail.com</li>
               <li><i className="fas fa-map-marker-alt"></i> South Africa</li>
             </ul>
           </div>

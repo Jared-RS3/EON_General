@@ -76,8 +76,8 @@ php -S localhost:8000
 ### 1. Update Company Information
 
 **Contact Details** (in `index.html`):
-- Search for placeholder phone numbers: `+27 (0)XX XXX XXXX`
-- Replace placeholder emails: `info@eongeneralsupply.co.za`
+- Search for placeholder phone numbers: `+27 82 891 2818`
+- Replace placeholder emails: `eongeneral01@gmail.com`
 - Update physical address in the contact section
 
 ### 2. Add Google Maps Integration
@@ -302,8 +302,8 @@ For form submissions, consider:
 ## 📞 Website Contact Information
 
 Current placeholder information to update:
-- Phone: `+27 (0)XX XXX XXXX`
-- Email: `info@eongeneralsupply.co.za`
+- Phone: `+27 82 891 2818`
+- Email: `eongeneral01@gmail.com`
 - Address: `Street Address, City, Province, Postal Code, South Africa`
 
 ## 🎯 Future Enhancements

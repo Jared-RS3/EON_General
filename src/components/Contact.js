@@ -14,16 +14,16 @@ function Contact() {
               <i className="fas fa-phone"></i>
               <div>
                 <h4>Phone</h4>
-                <p>+27 (0)XX XXX XXXX</p>
-                <p>+27 (0)XX XXX XXXX</p>
+                <p>+27 82 891 2818</p>
+                <p>+27 82 891 2818</p>
               </div>
             </div>
             <div className="info-item">
               <i className="fas fa-envelope"></i>
               <div>
                 <h4>Email</h4>
-                <p>info@eongeneralsupply.co.za</p>
-                <p>sales@eongeneralsupply.co.za</p>
+                <p>eongeneral01@gmail.com</p>
+                {/* <p>sales@eongeneralsupply.co.za</p> */}
               </div>
             </div>
             <div className="info-item">

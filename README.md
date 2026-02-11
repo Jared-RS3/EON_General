@@ -99,8 +99,8 @@ Key areas to customize:
 
 ## 📞 Contact Information
 
-- **Email**: info@eongeneralsupply.co.za
-- **Phone**: +27 (0)XX XXX XXXX
+- **Email**: eongeneral01@gmail.com
+- **Phone**: +27 82 891 2818
 - **Location**: South Africa
 
 ---

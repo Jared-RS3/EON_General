@@ -337,7 +337,7 @@ scrollBtn.addEventListener('mouseleave', () => {
 // Console message for developers
 console.log('%cEON General Supply Company', 'color: #1a5490; font-size: 24px; font-weight: bold;');
 console.log('%cWebsite developed with attention to detail', 'color: #f39c12; font-size: 14px;');
-console.log('%cFor inquiries: info@eongeneralsupply.co.za', 'color: #333; font-size: 12px;');
+console.log('%cFor inquiries: eongeneral01@gmail.com', 'color: #333; font-size: 12px;');
 
 // Initialize all animations on page load
 window.addEventListener('load', () => {
