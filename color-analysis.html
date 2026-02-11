@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Color Analysis</title>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            background: #1a1a1a; 
+            font-family: Arial;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1, h2 { 
+            color: #fff; 
+        }
+        .image-container {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        img { 
+            max-width: 100%; 
+            display: block;
+            margin: 0 auto;
+        }
+        .color-swatch {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            border: 3px solid #fff;
+            border-radius: 5px;
+        }
+        .colors {
+            background: #333;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .color-info {
+            color: #fff;
+            text-align: center;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>EON Portfolio PDF - Color Analysis</h1>
+        
+        <div class="image-container">
+            <h2>Portfolio Page 1</h2>
+            <img src="portfolio-img-000.jpg" alt="Portfolio page 1">
+        </div>
+        
+        <div class="image-container">
+            <h2>Portfolio Page 2</h2>
+            <img src="portfolio-img-001.jpg" alt="Portfolio page 2">
+        </div>
+        
+        <div class="image-container">
+            <h2>Portfolio Page 3</h2>
+            <img src="portfolio-img-002.jpg" alt="Portfolio page 3">
+        </div>
+
+        <div class="colors">
+            <h2>Tell me what colors you see:</h2>
+            <p style="color: #ccc;">Look at the images above and tell me the main brand colors (text, backgrounds, accents) so I can match them exactly!</p>
+        </div>
+    </div>
+</body>
+</html>
