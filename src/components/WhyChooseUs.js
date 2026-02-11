@@ -17,11 +17,11 @@ function WhyChooseUs() {
       title: 'Long-Term Partnerships',
       desc: 'We focus on building lasting relationships with our clients, understanding your needs, and growing together through mutual support and trust.'
     },
-    {
-      icon: 'user-tie',
-      title: 'Industry Specialists',
-      desc: 'Our team brings deep expertise in industrial and automotive sectors, providing expert advice and solutions tailored to your specific requirements.'
-    }
+    // {
+    //   icon: 'user-tie',
+    //   title: 'Industry Specialists',
+    //   desc: 'Our team brings deep expertise in industrial and automotive sectors, providing expert advice and solutions tailored to your specific requirements.'
+    // }
   ];
 
   return (
