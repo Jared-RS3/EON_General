@@ -2,12 +2,36 @@ import React from 'react';
 
 function Products() {
   const products = [
-    { icon: 'cogs', title: 'Engine Components', desc: 'Complete range of engine parts for all makes and models' },
-    { icon: 'oil-can', title: 'Filters & Fluids', desc: 'Oil, air, fuel filters and quality lubricants' },
-    { icon: 'car-battery', title: 'Electrical Systems', desc: 'Batteries, alternators, starters, and sensors' },
-    { icon: 'fan', title: 'Cooling Systems', desc: 'Radiators, thermostats, water pumps, and hoses' },
-    { icon: 'tachometer-alt', title: 'Brake Systems', desc: 'Pads, discs, drums, and hydraulic components' },
-    { icon: 'toolbox', title: 'General Parts', desc: 'Belts, hoses, gaskets, and maintenance items' }
+    {
+      title: 'Engine Components',
+      desc: 'Complete range of pistons, gaskets, valves, and rebuild kits for heavy-duty engines.',
+      image: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1200&h=800&fit=crop&q=80'
+    },
+    {
+      title: 'Filters & Fluids',
+      desc: 'Oil, air, and fuel filters with premium lubricants for reliable performance.',
+      image: '/assets/images/oil.jpeg'
+    },
+    {
+      title: 'Electrical Systems',
+      desc: 'Batteries, starter motors, alternators, and wiring components for fleet vehicles.',
+      image: '/assets/images/starters.jpeg'
+    },
+    {
+      title: 'Cooling Systems',
+      desc: 'Radiators, water pumps, thermostats, and hoses to keep equipment operating safely.',
+      image: '/assets/images/rad.jpeg'
+    },
+    {
+      title: 'Brake Systems',
+      desc: 'Brake pads, discs, drums, and hydraulic components for industrial and commercial use.',
+      image: '/assets/images/brakes.jpeg'
+    },
+    {
+      title: 'General Parts',
+      desc: 'Belts, bearings, hoses, seals, and maintenance essentials for daily operations.',
+      image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1200&h=800&fit=crop&q=80'
+    }
   ];
 
   return (
@@ -20,7 +44,7 @@ function Products() {
         <div className="products-grid">
           {products.map((product, index) => (
             <div className="product-card" key={index}>
-              <i className={`fas fa-${product.icon}`}></i>
+              <img src={product.image} alt={product.title} className="product-image" loading="lazy" />
               <h3>{product.title}</h3>
               <p>{product.desc}</p>
             </div>

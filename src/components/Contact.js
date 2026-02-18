@@ -45,6 +45,22 @@ function Contact() {
               </div>
             </div>
           </div>
+          <div className="contact-form-container">
+            <div className="w-full h-full shadow-xl rounded-3xl overflow-hidden border border-gray-200">
+              <iframe
+                src="https://airtable.com/embed/appTbQsmgyYdrmlVX/pagnODP7nh34t5hoM/form"
+                frameBorder="0"
+                width="100%"
+                height="733"
+                className="rounded-3xl"
+                style={{
+                  background: "transparent",
+                  border: "none",
+                }}
+                title="Contact Form"
+              ></iframe>
+            </div>
+          </div>
         </div>
         <div className="map-container">
           <div id="map" className="map-placeholder">

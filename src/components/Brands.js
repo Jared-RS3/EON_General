@@ -1,18 +1,51 @@
 import React from 'react';
+import {
+  siScania,
+  siVolvo,
+  siMan,
+  siDaf,
+  siIveco,
+  siToyota,
+  siFord,
+  siNissan,
+  siMitsubishi,
+  siCaterpillar,
+  siJcb,
+  siHitachi
+} from 'simple-icons';
 
 function Brands() {
   const brandCategories = [
     {
       title: 'Heavy Commercial Vehicles',
-      brands: ['Scania', 'Volvo', 'Mercedes-Benz', 'MAN', 'DAF', 'IVECO']
+      brands: [
+        { name: 'Scania', icon: siScania },
+        { name: 'Volvo', icon: siVolvo },
+        { name: 'Mercedes-Benz', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg' },
+        { name: 'MAN', icon: siMan },
+        { name: 'DAF', icon: siDaf },
+        { name: 'IVECO', icon: siIveco }
+      ]
     },
     {
       title: 'Light Commercial Vehicles',
-      brands: ['Toyota', 'Ford', 'Nissan', 'Isuzu', 'Mitsubishi']
+      brands: [
+        { name: 'Toyota', icon: siToyota },
+        { name: 'Ford', icon: siFord },
+        { name: 'Nissan', icon: siNissan },
+        { name: 'Isuzu', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Isuzu_logo.svg' },
+        { name: 'Mitsubishi', icon: siMitsubishi }
+      ]
     },
     {
       title: 'Industrial & Construction',
-      brands: ['Caterpillar', 'Komatsu', 'JCB', 'Liebherr', 'Hitachi']
+      brands: [
+        { name: 'Caterpillar', icon: siCaterpillar },
+        { name: 'Komatsu', logo: '/assets/images/logos/komatsu-logo.svg' },
+        { name: 'JCB', icon: siJcb },
+        { name: 'Liebherr', logo: '/assets/images/logos/liebherr-logo.svg' },
+        { name: 'Hitachi', icon: siHitachi }
+      ]
     }
   ];
 
@@ -28,8 +61,31 @@ function Brands() {
             <div className="brand-category" key={index}>
               <h3>{category.title}</h3>
               <div className="brand-list">
-                {category.brands.map((brand, i) => (
-                  <div className="brand-item" key={i}>{brand}</div>
+                {category.brands.map((brand) => (
+                  <div className="brand-item" key={brand.name}>
+                    <div className="brand-logo-wrap">
+                      {brand.icon ? (
+                        <svg
+                          role="img"
+                          viewBox="0 0 24 24"
+                          aria-label={`${brand.name} logo`}
+                          className="brand-logo-svg"
+                        >
+                          <path d={brand.icon.path} fill={`#${brand.icon.hex}`} />
+                        </svg>
+                      ) : brand.logo ? (
+                        <img
+                          src={brand.logo}
+                          alt={`${brand.name} logo`}
+                          className="brand-logo"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="brand-fallback">{brand.name.slice(0, 2).toUpperCase()}</span>
+                      )}
+                    </div>
+                    <span>{brand.name}</span>
+                  </div>
                 ))}
               </div>
             </div>

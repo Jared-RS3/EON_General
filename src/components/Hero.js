@@ -1,12 +1,14 @@
 import React from 'react';
 
 function Hero() {
+  const heroImage = '/assets/images/merc.avif';
+
   return (
     <section 
       id="home" 
       className="hero" 
       style={{
-        backgroundImage: "url('https://images.unsplash.com/photo-1596461200714-f5df04fdb157?q=80&w=2070&auto=format&fit=crop')",
+        backgroundImage: `url('${heroImage}')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
