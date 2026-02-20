@@ -2,13 +2,14 @@ import React from 'react';
 
 function Hero() {
   const heroImage = '/assets/images/merc.avif';
+  const heroImageFallback = '/assets/images/merces.jpeg';
 
   return (
     <section 
       id="home" 
       className="hero" 
       style={{
-        backgroundImage: `url('${heroImage}')`,
+        backgroundImage: `url('${heroImage}'), url('${heroImageFallback}')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}

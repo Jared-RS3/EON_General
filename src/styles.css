@@ -305,6 +305,10 @@ body {
     gap: 3rem;
 }
 
+.about-text {
+    text-align: center;
+}
+
 .about-text h3 {
     color: var(--secondary-color);
     font-size: 1.9rem;
@@ -332,6 +336,7 @@ body {
     color: #555;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
 }
 
@@ -1222,6 +1227,30 @@ body {
 @media (max-width: 480px) {
     .container {
         padding: 0 15px;
+    }
+
+    .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.6rem;
+        margin-bottom: 2rem;
+        align-items: start;
+    }
+
+    .stat-item i {
+        font-size: 1.4rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .stat-item h3 {
+        font-size: 0.85rem;
+        margin-bottom: 0.25rem;
+        line-height: 1.2;
+    }
+
+    .stat-item p {
+        font-size: 0.75rem;
+        line-height: 1.2;
     }
 
     .hero-title {
