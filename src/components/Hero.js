@@ -1,19 +1,22 @@
 import React from 'react';
 
 function Hero() {
-  const heroImage = '/assets/images/merc.avif';
-  const heroImageFallback = '/assets/images/merces.jpeg';
+  const assetBase = process.env.PUBLIC_URL || '';
+  const heroImage = `${assetBase}/assets/images/merc.avif`;
+  const heroImageFallback = `${assetBase}/assets/images/merces.jpeg`;
 
   return (
-    <section 
-      id="home" 
-      className="hero" 
-      style={{
-        backgroundImage: `url('${heroImage}'), url('${heroImageFallback}')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}
-    >
+    <section id="home" className="hero">
+      <picture className="hero-bg" aria-hidden="true">
+        <source srcSet={heroImage} type="image/avif" />
+        <img
+          src={heroImageFallback}
+          alt=""
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+        />
+      </picture>
       <div className="hero-overlay"></div>
       <div className="container">
         <div className="hero-content">

@@ -12,11 +12,19 @@ import Footer from './components/Footer';
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true);
 
   useEffect(() => {
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+    const loadTimer = window.setTimeout(() => {
+      setIsPageLoading(false);
+    }, 900);
+
+    return () => window.clearTimeout(loadTimer);
+  }, []);
+
+  useEffect(() => {
+    const anchorElements = Array.from(document.querySelectorAll('a[href^="#"]'));
+    const handleAnchorClick = function (e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
@@ -31,16 +39,58 @@ function App() {
             behavior: 'smooth'
           });
         }
-      });
+    };
+
+    anchorElements.forEach((anchor) => {
+      anchor.addEventListener('click', handleAnchorClick);
     });
 
-    // Scroll to top button
     const handleScroll = () => {
       setShowScrollTop(window.pageYOffset > 300);
     };
 
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let observer;
+
+    if (!reduceMotion) {
+      const revealTargets = document.querySelectorAll(
+        'section:not(#home), .product-card, .service-card, .industry-card, .feature-card, .brand-category, .info-item, .cert-card, .map-container'
+      );
+
+      revealTargets.forEach((element, index) => {
+        element.classList.add('reveal-on-scroll');
+        element.style.setProperty('--reveal-delay', `${(index % 6) * 70}ms`);
+      });
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+          rootMargin: '0px 0px -8% 0px'
+        }
+      );
+
+      revealTargets.forEach((element) => observer.observe(element));
+    }
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      anchorElements.forEach((anchor) => {
+        anchor.removeEventListener('click', handleAnchorClick);
+      });
+      if (observer) {
+        observer.disconnect();
+      }
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -52,6 +102,15 @@ function App() {
 
   return (
     <div className="App">
+      {isPageLoading && (
+        <div className="page-loader" role="status" aria-live="polite" aria-label="Loading website">
+          <div className="page-loader-mark">
+            <span className="page-loader-ring" aria-hidden="true"></span>
+            <span className="page-loader-text">EON</span>
+          </div>
+        </div>
+      )}
+
       <Navbar />
       <Hero />
       <About />

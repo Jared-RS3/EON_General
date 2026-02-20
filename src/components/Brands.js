@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   siScania,
   siVolvo,
@@ -15,6 +15,19 @@ import {
 } from 'simple-icons';
 
 function Brands() {
+  const assetBase = process.env.PUBLIC_URL || '';
+  const [openCategories, setOpenCategories] = useState([0, 1, 2]);
+
+  const toggleCategory = (index) => {
+    setOpenCategories((currentOpenCategories) => {
+      if (currentOpenCategories.includes(index)) {
+        return currentOpenCategories.filter((item) => item !== index);
+      }
+
+      return [...currentOpenCategories, index];
+    });
+  };
+
   const brandCategories = [
     {
       title: 'Heavy Commercial Vehicles',
@@ -33,7 +46,7 @@ function Brands() {
         { name: 'Toyota', icon: siToyota },
         { name: 'Ford', icon: siFord },
         { name: 'Nissan', icon: siNissan },
-        { name: 'Isuzu', logo: '/assets/images/logos/isuzu-logo.svg' },
+        { name: 'Isuzu', logo: `${assetBase}/assets/images/logos/isuzu-logo.svg` },
         { name: 'Mitsubishi', icon: siMitsubishi }
       ]
     },
@@ -41,9 +54,9 @@ function Brands() {
       title: 'Industrial & Construction',
       brands: [
         { name: 'Caterpillar', icon: siCaterpillar },
-        { name: 'Komatsu', logo: '/assets/images/logos/komatsu-logo.svg' },
+        { name: 'Komatsu', logo: `${assetBase}/assets/images/logos/komatsu-logo.svg` },
         { name: 'JCB', icon: siJcb },
-        { name: 'Liebherr', logo: '/assets/images/logos/liebherr-logo.svg' },
+        { name: 'Liebherr', logo: `${assetBase}/assets/images/logos/liebherr-logo.svg` },
         { name: 'Hitachi', icon: siHitachi }
       ]
     }
@@ -59,35 +72,45 @@ function Brands() {
         <div className="brands-grid">
           {brandCategories.map((category, index) => (
             <div className="brand-category" key={index}>
-              <h3>{category.title}</h3>
-              <div className="brand-list">
-                {category.brands.map((brand) => (
-                  <div className="brand-item" key={brand.name}>
-                    <div className="brand-logo-wrap">
-                      {brand.icon ? (
-                        <svg
-                          role="img"
-                          viewBox="0 0 24 24"
-                          aria-label={`${brand.name} logo`}
-                          className="brand-logo-svg"
-                        >
-                          <path d={brand.icon.path} fill={`#${brand.icon.hex}`} />
-                        </svg>
-                      ) : brand.logo ? (
-                        <img
-                          src={brand.logo}
-                          alt={`${brand.name} logo`}
-                          className="brand-logo"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <span className="brand-fallback">{brand.name.slice(0, 2).toUpperCase()}</span>
-                      )}
+              <button
+                type="button"
+                className="brand-category-toggle"
+                onClick={() => toggleCategory(index)}
+                aria-expanded={openCategories.includes(index)}
+              >
+                <h3>{category.title}</h3>
+                <i className={`fas ${openCategories.includes(index) ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
+              </button>
+              {openCategories.includes(index) && (
+                <div className="brand-list">
+                  {category.brands.map((brand) => (
+                    <div className="brand-item" key={brand.name}>
+                      <div className="brand-logo-wrap">
+                        {brand.icon ? (
+                          <svg
+                            role="img"
+                            viewBox="0 0 24 24"
+                            aria-label={`${brand.name} logo`}
+                            className="brand-logo-svg"
+                          >
+                            <path d={brand.icon.path} fill={`#${brand.icon.hex}`} />
+                          </svg>
+                        ) : brand.logo ? (
+                          <img
+                            src={brand.logo}
+                            alt={`${brand.name} logo`}
+                            className="brand-logo"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <span className="brand-fallback">{brand.name.slice(0, 2).toUpperCase()}</span>
+                        )}
+                      </div>
+                      <span>{brand.name}</span>
                     </div>
-                    <span>{brand.name}</span>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
