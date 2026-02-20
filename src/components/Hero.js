@@ -1,22 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Hero() {
   const assetBase = process.env.PUBLIC_URL || '';
-  const heroImage = `${assetBase}/assets/images/merc.avif`;
-  const heroImageFallback = `${assetBase}/assets/images/merces.jpeg`;
+  const cacheBuster = 'v=20260220';
+  const heroImageSources = [
+    `${assetBase}/assets/images/merc.avif?${cacheBuster}`,
+    `${assetBase}/assets/images/merces.jpeg?${cacheBuster}`,
+    `${assetBase}/assets/images/hero-truck.jpg?${cacheBuster}`
+  ];
+  const [heroImageIndex, setHeroImageIndex] = useState(0);
+
+  const handleHeroImageError = () => {
+    setHeroImageIndex((currentIndex) => {
+      if (currentIndex >= heroImageSources.length - 1) {
+        return currentIndex;
+      }
+
+      return currentIndex + 1;
+    });
+  };
 
   return (
     <section id="home" className="hero">
-      <picture className="hero-bg" aria-hidden="true">
-        <source srcSet={heroImage} type="image/avif" />
+      <div className="hero-bg" aria-hidden="true">
         <img
-          src={heroImageFallback}
+          src={heroImageSources[heroImageIndex]}
           alt=""
           loading="eager"
           fetchPriority="high"
           decoding="async"
+          onError={heroImageIndex < heroImageSources.length - 1 ? handleHeroImageError : undefined}
         />
-      </picture>
+      </div>
       <div className="hero-overlay"></div>
       <div className="container">
         <div className="hero-content">
