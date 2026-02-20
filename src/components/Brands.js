@@ -33,7 +33,7 @@ function Brands() {
         { name: 'Toyota', icon: siToyota },
         { name: 'Ford', icon: siFord },
         { name: 'Nissan', icon: siNissan },
-        { name: 'Isuzu', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Isuzu_logo.svg' },
+        { name: 'Isuzu', logo: '/assets/images/logos/isuzu-logo.svg' },
         { name: 'Mitsubishi', icon: siMitsubishi }
       ]
     },
