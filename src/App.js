@@ -59,7 +59,7 @@ function App() {
 
       revealTargets.forEach((element, index) => {
         element.classList.add('reveal-on-scroll');
-        element.style.setProperty('--reveal-delay', `${(index % 6) * 70}ms`);
+        element.style.setProperty('--reveal-delay', `${(index % 4) * 30}ms`);
       });
 
       observer = new IntersectionObserver(
@@ -72,8 +72,8 @@ function App() {
           });
         },
         {
-          threshold: 0.15,
-          rootMargin: '0px 0px -8% 0px'
+          threshold: 0.05,
+          rootMargin: '0px 0px 12% 0px'
         }
       );
 
