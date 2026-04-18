@@ -40,7 +40,7 @@ function Brands() {
         { name: 'SANY', logo: 'https://www.sanyglobal.com/static/common/head-footer-img/logo.jpg' },
         { name: 'TCM', logo: `${assetBase}/assets/images/logos/tcm-logo.svg` },
         { name: 'Toyota', logo: 'https://www.toyota-industries.com/assets/images/components/site_header/logo.svg' },
-        { name: 'LiuGong', logo: 'https://www.liugong.com/assets/common/img/LiuGong_Logo-white.svg', logoClassName: 'brand-logo-invert' }
+        { name: 'LiuGong', logo: `${assetBase}/assets/images/logos/liugong-logo.svg`, logoClassName: 'brand-logo-invert' }
       ]
     }
   ];

@@ -34,7 +34,7 @@ function Industries() {
               <li>Commercial vehicle fleets</li>
               <li>Trucks and trailers</li>
               <li>Buses and coaches</li>
-              <li>Light commercial vehicles</li>
+              {/* <li>Light commercial vehicles</li> */}
               <li>Passenger vehicles</li>
               <li>Tension cars and bogies</li>
             </ul>
