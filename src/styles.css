@@ -786,6 +786,10 @@ body {
     object-fit: contain;
 }
 
+.brand-logo-invert {
+    filter: invert(1);
+}
+
 .brand-logo-svg {
     width: 110px;
     height: 42px;

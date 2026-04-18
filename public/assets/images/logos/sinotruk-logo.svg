@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" role="img" aria-labelledby="sinotrukTitle sinotrukDesc">
+  <title id="sinotrukTitle">Sinotruk logo</title>
+  <desc id="sinotrukDesc">Sinotruk logo with the CNHTC badge and SINOTRUK wordmark.</desc>
+  <rect width="420" height="100" fill="#ffffff"/>
+  <g transform="translate(16 20)" fill="none" stroke="#2f6676" stroke-linejoin="round" stroke-width="4.5">
+    <path d="M28 5 10 31h13l10-11 10 11h13L38 5z"/>
+    <path d="M38 5v40"/>
+    <path d="M14 55h48v15H14z" fill="#ffffff"/>
+  </g>
+  <text x="40" y="85" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="#2f6676">CNHTC</text>
+  <text x="92" y="60" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="44" font-weight="900" letter-spacing="1" fill="#2f6676">SINOTRUK</text>
+</svg>

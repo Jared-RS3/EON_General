@@ -36,7 +36,7 @@ function Industries() {
               <li>Buses and coaches</li>
               <li>Light commercial vehicles</li>
               <li>Passenger vehicles</li>
-              <li>Workshop and garage support</li>
+              <li>Tension cars and bogies</li>
             </ul>
           </div>
         </div>

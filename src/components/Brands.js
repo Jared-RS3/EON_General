@@ -1,22 +1,13 @@
 import React, { useState } from 'react';
 import {
   siScania,
-  siVolvo,
-  siMan,
-  siDaf,
-  siIveco,
-  siToyota,
-  siFord,
-  siNissan,
-  siMitsubishi,
   siCaterpillar,
-  siJcb,
   siHitachi
 } from 'simple-icons';
 
 function Brands() {
   const assetBase = process.env.PUBLIC_URL || '';
-  const [openCategories, setOpenCategories] = useState([0, 1, 2]);
+  const [openCategories, setOpenCategories] = useState([0, 1]);
 
   const toggleCategory = (index) => {
     setOpenCategories((currentOpenCategories) => {
@@ -33,21 +24,11 @@ function Brands() {
       title: 'Heavy Commercial Vehicles',
       brands: [
         { name: 'Scania', icon: siScania },
-        { name: 'Volvo', icon: siVolvo },
+        { name: 'Terberg', logo: 'https://www.royalterberggroup.com/globalassets/rtg/logos/terberg-royal-groep_logo-fc-zpayoff.png' },
         { name: 'Mercedes-Benz', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg' },
-        { name: 'MAN', icon: siMan },
-        { name: 'DAF', icon: siDaf },
-        { name: 'IVECO', icon: siIveco }
-      ]
-    },
-    {
-      title: 'Light Commercial Vehicles',
-      brands: [
-        { name: 'Toyota', icon: siToyota },
-        { name: 'Ford', icon: siFord },
-        { name: 'Nissan', icon: siNissan },
-        { name: 'Isuzu', logo: `${assetBase}/assets/images/logos/isuzu-logo.svg` },
-        { name: 'Mitsubishi', icon: siMitsubishi }
+        { name: 'Shacman', logo: 'https://www.shacman.com/upload/images/2024/08/12/8663024ef62a4ef9acfd264f1a924297.png' },
+        { name: 'Sinotruk', logo: `${assetBase}/assets/images/logos/sinotruk-logo.svg` },
+        { name: 'FAW', logo: `${assetBase}/assets/images/logos/faw-logo.svg` }
       ]
     },
     {
@@ -55,9 +36,11 @@ function Brands() {
       brands: [
         { name: 'Caterpillar', icon: siCaterpillar },
         { name: 'Komatsu', logo: `${assetBase}/assets/images/logos/komatsu-logo.svg` },
-        { name: 'JCB', icon: siJcb },
-        { name: 'Liebherr', logo: `${assetBase}/assets/images/logos/liebherr-logo.svg` },
-        { name: 'Hitachi', icon: siHitachi }
+        { name: 'Hitachi', icon: siHitachi },
+        { name: 'SANY', logo: 'https://www.sanyglobal.com/static/common/head-footer-img/logo.jpg' },
+        { name: 'TCM', logo: `${assetBase}/assets/images/logos/tcm-logo.svg` },
+        { name: 'Toyota', logo: 'https://www.toyota-industries.com/assets/images/components/site_header/logo.svg' },
+        { name: 'LiuGong', logo: 'https://www.liugong.com/assets/common/img/LiuGong_Logo-white.svg', logoClassName: 'brand-logo-invert' }
       ]
     }
   ];
@@ -99,7 +82,7 @@ function Brands() {
                           <img
                             src={brand.logo}
                             alt={`${brand.name} logo`}
-                            className="brand-logo"
+                            className={['brand-logo', brand.logoClassName].filter(Boolean).join(' ')}
                             loading="lazy"
                           />
                         ) : (

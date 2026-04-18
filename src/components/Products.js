@@ -20,17 +20,17 @@ function Products() {
     {
       title: 'Cooling Systems',
       desc: 'Radiators, water pumps, thermostats, and hoses to keep equipment operating safely.',
-      image: '/assets/images/rad.jpeg'
+      image: '/assets/images/cooling.png'
     },
     {
       title: 'Brake Systems',
       desc: 'Brake pads, discs, drums, and hydraulic components for industrial and commercial use.',
-      image: '/assets/images/brakes.jpeg'
+      image: '/assets/images/braking.png'
     },
     {
       title: 'General Parts',
       desc: 'Belts, bearings, hoses, seals, and maintenance essentials for daily operations.',
-      image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1200&h=800&fit=crop&q=80'
+      image: '/assets/images/general.png'
     }
   ];
 
