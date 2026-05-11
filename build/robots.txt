@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Allow: /favicon.png
+Allow: /logo192.png
+Allow: /assets/images/
+
+Sitemap: https://eongeneral.co.za/sitemap.xml
 
 Sitemap: https://eongeneral.co.za/sitemap.xml
