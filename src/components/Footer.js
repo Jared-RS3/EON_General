@@ -42,6 +42,9 @@ function Footer() {
         </div>
         <div className="footer-bottom">
           <p>&copy; 2026 EON General Supply Company. All rights reserved.</p>
+          <ul className="footer-legal">
+            <li><a href="#/privacy">Privacy Policy</a></li>
+          </ul>
         </div>
       </div>
     </footer>

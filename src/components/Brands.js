@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import {
   siScania,
   siCaterpillar,
-  siHitachi
+  siHitachi,
+  siTata
 } from 'simple-icons';
 
 function Brands() {
@@ -28,7 +29,11 @@ function Brands() {
         { name: 'Mercedes-Benz', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg' },
         { name: 'Shacman', logo: 'https://www.shacman.com/upload/images/2024/08/12/8663024ef62a4ef9acfd264f1a924297.png' },
         { name: 'Sinotruk', logo: `${assetBase}/assets/images/logos/sinotruk-logo.svg` },
-        { name: 'FAW', logo: `${assetBase}/assets/images/logos/faw-logo.svg` }
+        { name: 'FAW', logo: `${assetBase}/assets/images/logos/faw-logo.svg` },
+        { name: 'Eicher', logo: `${assetBase}/assets/images/logos/eicher-logo.svg` },
+        { name: 'Ashok Leyland', logo: `${assetBase}/assets/images/logos/ashok-leyland-logo.svg` },
+        { name: 'Mahindra', logo: `${assetBase}/assets/images/logos/mahindra-logo.jpg` },
+        { name: 'Tata', icon: siTata }
       ]
     },
     {
@@ -76,7 +81,15 @@ function Brands() {
                             aria-label={`${brand.name} logo`}
                             className="brand-logo-svg"
                           >
-                            <path d={brand.icon.path} fill={`#${brand.icon.hex}`} />
+                            <path
+                              d={brand.icon.path}
+                              fill={`#${brand.icon.hex}`}
+                              style={brand.iconScale ? {
+                                transform: `scale(${brand.iconScale})`,
+                                transformOrigin: 'center',
+                                transformBox: 'view-box'
+                              } : undefined}
+                            />
                           </svg>
                         ) : brand.logo ? (
                           <img
