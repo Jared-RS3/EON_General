@@ -940,22 +940,27 @@ button:focus-visible .roll-char {
     transition: opacity 0.4s var(--ease), transform 0.5s var(--ease);
 }
 
-.brand-tile:hover {
+.brand-tile:hover,
+.brand-tile.is-spot {
     background: #ededed;
 }
 
 .brand-tile:hover .brand-svg,
-.brand-tile:hover .brand-img {
+.brand-tile:hover .brand-img,
+.brand-tile.is-spot .brand-svg,
+.brand-tile.is-spot .brand-img {
     filter: none;
     opacity: 1;
     transform: scale(1.06) translateY(-6px);
 }
 
-.brand-tile:hover .brand-img-invert {
+.brand-tile:hover .brand-img-invert,
+.brand-tile.is-spot .brand-img-invert {
     filter: invert(1);
 }
 
-.brand-tile:hover .brand-name {
+.brand-tile:hover .brand-name,
+.brand-tile.is-spot .brand-name {
     opacity: 1;
     transform: none;
 }
@@ -992,16 +997,19 @@ button:focus-visible .roll-char {
     transition: transform 0.5s var(--ease);
 }
 
-.brand-tile-cta:hover {
+.brand-tile-cta:hover,
+.brand-tile-cta.is-spot {
     background: var(--accent);
     color: var(--ink);
 }
 
-.brand-tile-cta:hover .brand-cta-link {
+.brand-tile-cta:hover .brand-cta-link,
+.brand-tile-cta.is-spot .brand-cta-link {
     color: var(--ink);
 }
 
-.brand-tile-cta:hover .brand-cta-link .icon {
+.brand-tile-cta:hover .brand-cta-link .icon,
+.brand-tile-cta.is-spot .brand-cta-link .icon {
     transform: translate(3px, -3px);
 }
 
@@ -1063,6 +1071,13 @@ button:focus-visible .roll-char {
 
 .product-card:hover .product-media img {
     transform: scale(1.05);
+}
+
+/* Touch screens: the card docked on top of the stack plays the hover zoom. */
+@media (hover: none) {
+    .product-card.is-spot .product-media img {
+        transform: scale(1.05);
+    }
 }
 
 .product-body {
@@ -1360,7 +1375,8 @@ button:focus-visible .roll-char {
     text-transform: uppercase;
 }
 
-.mission-card.is-in:hover {
+.mission-card.is-in:hover,
+.mission-card.is-in.is-spot {
     transform: translateY(-6px);
     box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
 }
@@ -1447,11 +1463,13 @@ button:focus-visible .roll-char {
     transition: transform 0.9s var(--ease);
 }
 
-.industry-card:hover img {
+.industry-card:hover img,
+.industry-card.is-spot img {
     transform: scale(1.07);
 }
 
-.industry-card:hover::after {
+.industry-card:hover::after,
+.industry-card.is-spot::after {
     transform: scaleX(1);
 }
 
@@ -1493,7 +1511,8 @@ button:focus-visible .roll-char {
     transition: transform 0.7s var(--ease), color 0.4s ease;
 }
 
-.industry-card:hover .industry-card-body p {
+.industry-card:hover .industry-card-body p,
+.industry-card.is-spot .industry-card-body p {
     transform: none;
     color: #fff;
 }
@@ -1533,7 +1552,8 @@ button:focus-visible .roll-char {
     transition: transform 1.4s var(--ease);
 }
 
-.why-card:hover .why-media img {
+.why-card:hover .why-media img,
+.why-card.is-spot .why-media img {
     transform: scale(1.06);
 }
 
@@ -1700,7 +1720,8 @@ button:focus-visible .roll-char {
     transition: filter 0.9s var(--ease);
 }
 
-.contact-map:hover iframe {
+.contact-map:hover iframe,
+.contact-map.is-spot iframe {
     filter: none;
 }
 
@@ -2039,12 +2060,42 @@ button:focus-visible .roll-char {
         --gutter: 16px;
     }
 
+    /* Section headings sit centred on phones. */
+    .section-head,
+    .services-copy,
+    .contact-copy,
+    .mission-head,
+    .about-lede,
+    .industries-note {
+        text-align: center;
+    }
+
+    .section-head-split {
+        justify-items: center;
+    }
+
+    .section-intro {
+        max-width: 34em;
+    }
+
+    .about .container > .eyebrow {
+        display: flex;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .accordion {
+        text-align: left;
+    }
+
     .hero-inner {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         justify-content: flex-end;
         gap: 22px;
         padding-bottom: 24px;
+        text-align: center;
     }
 
     .hero-aside {
@@ -2086,38 +2137,53 @@ button:focus-visible .roll-char {
         font-size: 14px;
     }
 
+    /* Same stacking deck as desktop, stacked vertically. Each card docks a
+       little lower than the last so the edges of the deck peek out above. */
     .product-stack {
-        gap: 16px;
+        gap: 24px;
     }
 
     .product-card {
-        position: relative;
-        top: auto;
+        top: calc(var(--nav-h) + 12px + var(--i, 0) * 10px);
         grid-template-columns: 1fr;
-        gap: 22px;
-        height: auto;
-        padding: 16px;
-        transform: none;
-        background: #f6f6f6;
+        grid-template-rows: minmax(0, 1fr) auto;
+        gap: 18px;
+        height: clamp(460px, calc(100vh - var(--nav-h) - 88px), 620px);
+        height: clamp(460px, calc(100svh - var(--nav-h) - 88px), 620px);
+        padding: 14px;
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.06);
     }
 
     .product-media {
-        aspect-ratio: 4 / 3;
-    }
-
-    .product-media::after {
-        display: none;
+        min-height: 0;
     }
 
     .product-body {
-        gap: 24px;
-        padding: 0 4px 8px;
+        gap: 18px;
+        padding: 0 4px 4px;
+    }
+
+    .product-body .eyebrow {
+        margin-bottom: 0;
     }
 
     .product-main h3 {
-        padding-bottom: 16px;
-        margin-bottom: 18px;
-        font-size: 1.75rem;
+        padding-bottom: 14px;
+        margin-bottom: 14px;
+        font-size: 1.65rem;
+    }
+
+    .product-main p {
+        font-size: 1rem;
+    }
+
+    .tag-list {
+        gap: 6px;
+    }
+
+    .tag-list li {
+        padding: 7px 9px;
+        font-size: 10px;
     }
 
     .accordion-trigger {
@@ -2140,10 +2206,15 @@ button:focus-visible .roll-char {
         padding-top: calc(var(--nav-h) + 48px);
     }
 
+    .mission-quote {
+        margin: 0 auto;
+    }
+
     .mission-foot {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         margin-top: 56px;
+        text-align: center;
     }
 
     .mission-card {
@@ -2153,7 +2224,7 @@ button:focus-visible .roll-char {
 
     .section-head-row {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 24px;
     }
 
@@ -2166,8 +2237,21 @@ button:focus-visible .roll-char {
         gap: 40px;
     }
 
+    .contact-intro {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .contact-details {
         grid-template-columns: 1fr;
+    }
+
+    .contact-detail dt {
+        justify-content: center;
+    }
+
+    .contact-topics {
+        justify-content: center;
     }
 
     .contact-map {
@@ -2191,6 +2275,31 @@ button:focus-visible .roll-char {
     .footer-bottom {
         flex-direction: column;
         margin-top: 48px;
+    }
+
+    .scroll-top {
+        right: 16px;
+        bottom: 16px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Touch screens: no hover, so buttons play their fill/roll on tap instead. */
+@media (hover: none) {
+    .btn:active::before {
+        transform: scaleY(1);
+        transition-duration: 0.3s;
+    }
+
+    .btn:active .roll-char {
+        transform: translateY(-100%);
+        transition-delay: 0ms;
+    }
+
+    .square-btn:active:not(:disabled) {
+        background: var(--accent);
+        color: var(--ink);
     }
 }
 

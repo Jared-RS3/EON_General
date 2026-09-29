@@ -1,5 +1,5 @@
-import React from 'react';
-import { Reveal } from '../lib/motion';
+import React, { useRef } from 'react';
+import { Reveal, useSpotlight } from '../lib/motion';
 import { asset } from '../data/company';
 
 const features = [
@@ -24,8 +24,11 @@ const features = [
 ];
 
 function WhyChooseUs() {
+  const sectionRef = useRef(null);
+  useSpotlight(sectionRef, '.why-card');
+
   return (
-    <section id="why-choose" className="why">
+    <section id="why-choose" className="why" ref={sectionRef}>
       <div className="container">
         <header className="section-head section-head-center">
           <Reveal as="p" variant="fade" className="eyebrow">Why Choose Us</Reveal>

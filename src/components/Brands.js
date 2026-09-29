@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { siScania, siCaterpillar, siHitachi, siTata } from 'simple-icons';
-import { Icon, Reveal } from '../lib/motion';
+import { Icon, Reveal, useSpotlight } from '../lib/motion';
 import { asset } from '../data/company';
 
 const categories = [
@@ -58,13 +58,17 @@ function BrandLogo({ brand }) {
 
 function Brands() {
   const [filter, setFilter] = useState('all');
+  const sectionRef = useRef(null);
+
+  // A narrow band so the logos colour in row by row as they pass the middle.
+  useSpotlight(sectionRef, '.brand-tile', { band: 0.22 }, [filter]);
 
   const brands = categories
     .filter((category) => filter === 'all' || category.id === filter)
     .flatMap((category) => category.brands);
 
   return (
-    <section id="brands" className="brands">
+    <section id="brands" className="brands" ref={sectionRef}>
       <div className="container">
         <header className="section-head section-head-center">
           <Reveal as="p" variant="fade" className="eyebrow">Brands We Support</Reveal>

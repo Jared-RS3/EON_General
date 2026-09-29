@@ -147,6 +147,48 @@ export function useScrollFrame(callback, deps = []) {
   }, deps);
 }
 
+// Touch screens have no hover, so hover-only effects would never play there.
+// Instead, items matching `selector` inside `ref` get an `is-spot` class while
+// they sit in the middle of the screen. `band` is the share of the viewport
+// height (centred) that counts as the middle. Pass `deps` that change the items.
+export function useSpotlight(ref, selector, { band = 0.5 } = {}, deps = []) {
+  useEffect(() => {
+    const root = ref.current;
+    if (!root || !window.matchMedia || !window.matchMedia('(hover: none)').matches) return undefined;
+
+    let frame = null;
+    const update = () => {
+      frame = null;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const top = vh * (0.5 - band / 2);
+      const bottom = vh * (0.5 + band / 2);
+
+      root.querySelectorAll(selector).forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        item.classList.toggle('is-spot', x > vw * 0.2 && x < vw * 0.8 && y > top && y < bottom);
+      });
+    };
+    const schedule = () => {
+      if (frame === null) frame = window.requestAnimationFrame(update);
+    };
+
+    schedule();
+    // Capturing on document also catches scrolls inside carousels, which don't bubble.
+    document.addEventListener('scroll', schedule, { capture: true, passive: true });
+    window.addEventListener('resize', schedule);
+
+    return () => {
+      document.removeEventListener('scroll', schedule, { capture: true });
+      window.removeEventListener('resize', schedule);
+      if (frame !== null) window.cancelAnimationFrame(frame);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ref, selector, band, ...deps]);
+}
+
 // Paragraph whose words darken one by one as it scrolls through the viewport.
 export function WordReveal({ as: Tag = 'p', text, className = '' }) {
   const ref = useRef(null);

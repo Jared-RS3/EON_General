@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Icon, Reveal } from '../lib/motion';
+import { Icon, Reveal, useSpotlight } from '../lib/motion';
 import { asset } from '../data/company';
 
 const industries = [
@@ -57,6 +57,8 @@ function Industries() {
   const trackRef = useRef(null);
   const drag = useRef(null);
   const [edges, setEdges] = useState({ start: true, end: false });
+
+  useSpotlight(trackRef, '.industry-card', { band: 0.7 });
 
   const updateEdges = () => {
     const track = trackRef.current;

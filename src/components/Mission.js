@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Reveal, WordReveal, useScrollFrame } from '../lib/motion';
+import { Reveal, WordReveal, useScrollFrame, useSpotlight } from '../lib/motion';
 import { asset } from '../data/company';
 
 const mission =
@@ -8,6 +8,8 @@ const mission =
 function Mission() {
   const sectionRef = useRef(null);
   const bgRef = useRef(null);
+
+  useSpotlight(sectionRef, '.mission-card');
 
   // Background drifts against the scroll for a parallax window effect.
   useScrollFrame(() => {
@@ -30,7 +32,7 @@ function Mission() {
       <div className="mission-shade" aria-hidden="true"></div>
 
       <div className="container mission-inner">
-        <div>
+        <div className="mission-head">
           <Reveal as="p" variant="fade" className="eyebrow eyebrow-light" id="mission-title">
             Our Mission
           </Reveal>

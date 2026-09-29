@@ -55,22 +55,27 @@ function Products() {
   const listRef = useRef(null);
 
   // As each card slides over the one before it, the covered card dims and
-  // recedes slightly, giving the stack depth.
+  // recedes slightly, giving the stack depth. The card currently docked on top
+  // is marked `is-spot`, which stands in for hover on touch screens.
   useScrollFrame(() => {
     const list = listRef.current;
     if (!list) return;
 
     const cards = Array.from(list.children);
+    // Measure everything before writing so the loop doesn't force a layout per card.
+    const rects = cards.map((card) => card.getBoundingClientRect());
+    const docked = cards.map((card) => parseFloat(getComputedStyle(card).top) || 0);
+
     cards.forEach((card, i) => {
-      const next = cards[i + 1];
+      const current = rects[i];
+      const upcoming = rects[i + 1];
       let progress = 0;
-      if (next) {
-        const current = card.getBoundingClientRect();
-        const upcoming = next.getBoundingClientRect();
+      if (upcoming) {
         progress = 1 - (upcoming.top - current.top) / current.height;
         progress = Math.min(1, Math.max(0, progress));
       }
       card.style.setProperty('--cover', progress.toFixed(3));
+      card.classList.toggle('is-spot', current.top <= docked[i] + 2 && current.bottom > 0 && progress < 0.5);
     });
   });
 
@@ -95,7 +100,7 @@ function Products() {
 
         <div className="product-stack" ref={listRef}>
           {products.map((product, i) => (
-            <article className="product-card" key={product.title}>
+            <article className="product-card" style={{ '--i': i }} key={product.title}>
               <div className={`product-media${product.fit === 'contain' ? ' is-contain' : ''}`}>
                 <img src={product.image} alt={product.alt} loading="lazy" decoding="async" />
               </div>

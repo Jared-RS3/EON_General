@@ -1,10 +1,13 @@
-import React from 'react';
-import { Icon, Reveal } from '../lib/motion';
+import React, { useRef } from 'react';
+import { Icon, Reveal, useSpotlight } from '../lib/motion';
 import { asset, company } from '../data/company';
 
 const topics = ['Engine Components', 'Filters & Fluids', 'Electrical', 'Cooling', 'Brakes', 'Custom Sourcing', 'Bulk Supply', 'Refurbishment'];
 
 function Contact() {
+  const sectionRef = useRef(null);
+  useSpotlight(sectionRef, '.contact-map');
+
   const details = [
     {
       icon: 'phone',
@@ -24,7 +27,7 @@ function Contact() {
   ];
 
   return (
-    <section id="contact" className="contact" data-theme="dark">
+    <section id="contact" className="contact" data-theme="dark" ref={sectionRef}>
       <div className="contact-bg" aria-hidden="true">
         <img src={asset('site/contact-bg.jpg')} alt="" loading="lazy" decoding="async" />
       </div>
