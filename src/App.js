@@ -4,12 +4,14 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Products from './components/Products';
 import Services from './components/Services';
+import Mission from './components/Mission';
 import Industries from './components/Industries';
 import Brands from './components/Brands';
 import WhyChooseUs from './components/WhyChooseUs';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import { Icon } from './lib/motion';
 
 // Routes are hash-based so the site keeps working as a static build with no
 // server rewrites. Section anchors stay plain ("#about"); page routes are
@@ -20,24 +22,19 @@ function getRoute() {
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [isPageLoading, setIsPageLoading] = useState(true);
   const [route, setRoute] = useState(getRoute);
   const pendingScrollRef = useRef(null);
-
-  useEffect(() => {
-    const loadTimer = window.setTimeout(() => {
-      setIsPageLoading(false);
-    }, 900);
-
-    return () => window.clearTimeout(loadTimer);
-  }, []);
 
   const scrollToTarget = useCallback((target) => {
     const navbar = document.querySelector('.navbar');
     const navHeight = navbar ? navbar.offsetHeight : 0;
+    // Home-page sections have generous top padding, so the transparent nav can
+    // sit over it; anything else (e.g. policy headings) clears the nav.
+    const isPageSection = target.parentElement && target.parentElement.tagName === 'MAIN';
+    const top = target.getBoundingClientRect().top + window.pageYOffset - (isPageSection ? 0 : navHeight);
 
     window.scrollTo({
-      top: target.offsetTop - navHeight,
+      top: Math.max(0, top),
       behavior: 'smooth'
     });
   }, []);
@@ -93,10 +90,10 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.pageYOffset > 300);
+      setShowScrollTop(window.pageYOffset > 900);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -119,41 +116,6 @@ function App() {
     return () => window.cancelAnimationFrame(frame);
   }, [route, scrollToTarget]);
 
-  useEffect(() => {
-    if (route !== 'home') return undefined;
-
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) return undefined;
-
-    const revealTargets = document.querySelectorAll(
-      'section:not(#home), .product-card, .service-card, .industry-card, .feature-card, .brand-category, .info-item, .cert-card, .map-container'
-    );
-
-    revealTargets.forEach((element, index) => {
-      element.classList.add('reveal-on-scroll');
-      element.style.setProperty('--reveal-delay', `${(index % 4) * 30}ms`);
-    });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.05,
-        rootMargin: '0px 0px 12% 0px'
-      }
-    );
-
-    revealTargets.forEach((element) => observer.observe(element));
-
-    return () => observer.disconnect();
-  }, [route]);
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -163,63 +125,35 @@ function App() {
 
   return (
     <div className="App">
-      {isPageLoading && (
-        <div className="page-loader" role="status" aria-live="polite" aria-label="Loading website">
-          <div className="page-loader-mark">
-            <span className="page-loader-ring" aria-hidden="true"></span>
-            <span className="page-loader-text">EON</span>
-          </div>
-        </div>
-      )}
-
       <Navbar />
 
       {route === 'privacy' ? (
         <PrivacyPolicy />
       ) : (
-        <>
+        <main>
           <Hero />
           <About />
+          <Brands />
           <Products />
           <Services />
+          <Mission />
           <Industries />
-          <Brands />
           <WhyChooseUs />
           <Contact />
-        </>
+        </main>
       )}
 
       <Footer />
 
-      {showScrollTop && (
-        <button 
-          className="scroll-to-top" 
-          onClick={scrollToTop}
-          style={{
-            position: 'fixed',
-            bottom: '30px',
-            right: '30px',
-            width: '50px',
-            height: '50px',
-            borderRadius: '50%',
-            background: 'var(--secondary-color)',
-            color: 'white',
-            border: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '1.5rem',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
-            zIndex: 999,
-            transition: 'all 0.3s ease'
-          }}
-          onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
-          onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-        >
-          <i className="fas fa-arrow-up"></i>
-        </button>
-      )}
+      <button
+        type="button"
+        className={`scroll-top${showScrollTop ? ' is-visible' : ''}`}
+        onClick={scrollToTop}
+        aria-label="Back to top"
+        tabIndex={showScrollTop ? 0 : -1}
+      >
+        <Icon name="arrowUp" size={18} />
+      </button>
     </div>
   );
 }

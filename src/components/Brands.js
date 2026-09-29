@@ -1,118 +1,108 @@
 import React, { useState } from 'react';
-import {
-  siScania,
-  siCaterpillar,
-  siHitachi,
-  siTata
-} from 'simple-icons';
+import { siScania, siCaterpillar, siHitachi, siTata } from 'simple-icons';
+import { Icon, Reveal } from '../lib/motion';
+import { asset } from '../data/company';
+
+const categories = [
+  {
+    id: 'commercial',
+    title: 'Heavy Commercial',
+    brands: [
+      { name: 'Scania', icon: siScania },
+      { name: 'Terberg', logo: 'https://www.royalterberggroup.com/globalassets/rtg/logos/terberg-royal-groep_logo-fc-zpayoff.png' },
+      { name: 'Mercedes-Benz', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg' },
+      { name: 'Shacman', logo: 'https://www.shacman.com/upload/images/2024/08/12/8663024ef62a4ef9acfd264f1a924297.png' },
+      { name: 'Sinotruk', logo: asset('logos/sinotruk-logo.svg') },
+      { name: 'FAW', logo: asset('logos/faw-logo.svg') },
+      { name: 'Eicher', logo: asset('logos/eicher-logo.svg') },
+      { name: 'Ashok Leyland', logo: asset('logos/ashok-leyland-logo.svg') },
+      { name: 'Mahindra', logo: asset('logos/mahindra-logo.jpg') },
+      { name: 'Tata', icon: siTata }
+    ]
+  },
+  {
+    id: 'industrial',
+    title: 'Industrial & Construction',
+    brands: [
+      { name: 'Caterpillar', icon: siCaterpillar },
+      { name: 'Komatsu', logo: asset('logos/komatsu-logo.svg') },
+      { name: 'Hitachi', icon: siHitachi },
+      { name: 'SANY', logo: 'https://www.sanyglobal.com/static/common/head-footer-img/logo.jpg' },
+      { name: 'TCM', logo: asset('logos/tcm-logo.svg') },
+      { name: 'Toyota', logo: 'https://www.toyota-industries.com/assets/images/components/site_header/logo.svg' },
+      { name: 'LiuGong', logo: asset('logos/liugong-logo.svg'), invert: true }
+    ]
+  }
+];
+
+const filters = [{ id: 'all', title: 'All Brands' }, ...categories.map(({ id, title }) => ({ id, title }))];
+
+function BrandLogo({ brand }) {
+  if (brand.icon) {
+    return (
+      <svg role="img" viewBox="0 0 24 24" aria-label={`${brand.name} logo`} className="brand-svg">
+        <path d={brand.icon.path} fill={`#${brand.icon.hex}`} />
+      </svg>
+    );
+  }
+
+  return (
+    <img
+      src={brand.logo}
+      alt={`${brand.name} logo`}
+      className={`brand-img${brand.invert ? ' brand-img-invert' : ''}`}
+      loading="lazy"
+    />
+  );
+}
 
 function Brands() {
-  const assetBase = process.env.PUBLIC_URL || '';
-  const [openCategories, setOpenCategories] = useState([0, 1]);
+  const [filter, setFilter] = useState('all');
 
-  const toggleCategory = (index) => {
-    setOpenCategories((currentOpenCategories) => {
-      if (currentOpenCategories.includes(index)) {
-        return currentOpenCategories.filter((item) => item !== index);
-      }
-
-      return [...currentOpenCategories, index];
-    });
-  };
-
-  const brandCategories = [
-    {
-      title: 'Heavy Commercial Vehicles',
-      brands: [
-        { name: 'Scania', icon: siScania },
-        { name: 'Terberg', logo: 'https://www.royalterberggroup.com/globalassets/rtg/logos/terberg-royal-groep_logo-fc-zpayoff.png' },
-        { name: 'Mercedes-Benz', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg' },
-        { name: 'Shacman', logo: 'https://www.shacman.com/upload/images/2024/08/12/8663024ef62a4ef9acfd264f1a924297.png' },
-        { name: 'Sinotruk', logo: `${assetBase}/assets/images/logos/sinotruk-logo.svg` },
-        { name: 'FAW', logo: `${assetBase}/assets/images/logos/faw-logo.svg` },
-        { name: 'Eicher', logo: `${assetBase}/assets/images/logos/eicher-logo.svg` },
-        { name: 'Ashok Leyland', logo: `${assetBase}/assets/images/logos/ashok-leyland-logo.svg` },
-        { name: 'Mahindra', logo: `${assetBase}/assets/images/logos/mahindra-logo.jpg` },
-        { name: 'Tata', icon: siTata }
-      ]
-    },
-    {
-      title: 'Industrial & Construction',
-      brands: [
-        { name: 'Caterpillar', icon: siCaterpillar },
-        { name: 'Komatsu', logo: `${assetBase}/assets/images/logos/komatsu-logo.svg` },
-        { name: 'Hitachi', icon: siHitachi },
-        { name: 'SANY', logo: 'https://www.sanyglobal.com/static/common/head-footer-img/logo.jpg' },
-        { name: 'TCM', logo: `${assetBase}/assets/images/logos/tcm-logo.svg` },
-        { name: 'Toyota', logo: 'https://www.toyota-industries.com/assets/images/components/site_header/logo.svg' },
-        { name: 'LiuGong', logo: `${assetBase}/assets/images/logos/liugong-logo.svg`, logoClassName: 'brand-logo-invert' }
-      ]
-    }
-  ];
+  const brands = categories
+    .filter((category) => filter === 'all' || category.id === filter)
+    .flatMap((category) => category.brands);
 
   return (
     <section id="brands" className="brands">
       <div className="container">
-        <div className="section-header">
-          <h2>Brands We Support</h2>
-          <p>Trusted partnerships with leading manufacturers</p>
-        </div>
-        <div className="brands-grid">
-          {brandCategories.map((category, index) => (
-            <div className="brand-category" key={index}>
+        <header className="section-head section-head-center">
+          <Reveal as="p" variant="fade" className="eyebrow">Brands We Support</Reveal>
+          <Reveal as="h2" className="section-title" delay={80}>
+            Parts for the Machines
+            <br />
+            That Move South Africa
+          </Reveal>
+          <Reveal className="chip-tabs" delay={160} role="tablist" aria-label="Filter brands">
+            {filters.map((item) => (
               <button
                 type="button"
-                className="brand-category-toggle"
-                onClick={() => toggleCategory(index)}
-                aria-expanded={openCategories.includes(index)}
+                role="tab"
+                aria-selected={filter === item.id}
+                className={`chip-tab${filter === item.id ? ' is-active' : ''}`}
+                onClick={() => setFilter(item.id)}
+                key={item.id}
               >
-                <h3>{category.title}</h3>
-                <i className={`fas ${openCategories.includes(index) ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
+                {item.title}
               </button>
-              {openCategories.includes(index) && (
-                <div className="brand-list">
-                  {category.brands.map((brand) => (
-                    <div className="brand-item" key={brand.name}>
-                      <div className="brand-logo-wrap">
-                        {brand.icon ? (
-                          <svg
-                            role="img"
-                            viewBox="0 0 24 24"
-                            aria-label={`${brand.name} logo`}
-                            className="brand-logo-svg"
-                          >
-                            <path
-                              d={brand.icon.path}
-                              fill={`#${brand.icon.hex}`}
-                              style={brand.iconScale ? {
-                                transform: `scale(${brand.iconScale})`,
-                                transformOrigin: 'center',
-                                transformBox: 'view-box'
-                              } : undefined}
-                            />
-                          </svg>
-                        ) : brand.logo ? (
-                          <img
-                            src={brand.logo}
-                            alt={`${brand.name} logo`}
-                            className={['brand-logo', brand.logoClassName].filter(Boolean).join(' ')}
-                            loading="lazy"
-                          />
-                        ) : (
-                          <span className="brand-fallback">{brand.name.slice(0, 2).toUpperCase()}</span>
-                        )}
-                      </div>
-                      <span>{brand.name}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
+            ))}
+          </Reveal>
+        </header>
+
+        <Reveal className="brand-grid" variant="none">
+          {brands.map((brand, i) => (
+            <div className="brand-tile" style={{ '--i': i }} key={`${filter}-${brand.name}`}>
+              <BrandLogo brand={brand} />
+              <span className="brand-name">{brand.name}</span>
             </div>
           ))}
-        </div>
-        <div className="brands-note">
-          <p><i className="fas fa-info-circle"></i> We continuously expand our brand range to meet our clients' evolving needs. Don't see your brand? Contact us!</p>
-        </div>
+          <a href="#contact" className="brand-tile brand-tile-cta" style={{ '--i': brands.length }} key={`${filter}-cta`}>
+            <span className="brand-cta-text">Don&rsquo;t see your brand?</span>
+            <span className="brand-cta-link">
+              Ask us <Icon name="arrowUpRight" size={16} />
+            </span>
+          </a>
+        </Reveal>
       </div>
     </section>
   );

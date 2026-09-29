@@ -1,63 +1,40 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
+import { RollText, useScrollFrame } from '../lib/motion';
+import { asset } from '../data/company';
 
 function Hero() {
-  const assetBase = process.env.PUBLIC_URL || '';
-  const cacheBuster = 'v=20260220';
-  const heroImageSources = [
-    `${assetBase}/assets/images/merc.avif?${cacheBuster}`,
-    `${assetBase}/assets/images/merces.jpeg?${cacheBuster}`,
-    `${assetBase}/assets/images/hero-truck.jpg?${cacheBuster}`
-  ];
-  const [heroImageIndex, setHeroImageIndex] = useState(0);
+  const mediaRef = useRef(null);
 
-  const handleHeroImageError = () => {
-    setHeroImageIndex((currentIndex) => {
-      if (currentIndex >= heroImageSources.length - 1) {
-        return currentIndex;
-      }
-
-      return currentIndex + 1;
-    });
-  };
+  // Gentle parallax: the photo drifts down at a third of the scroll speed.
+  useScrollFrame(() => {
+    const media = mediaRef.current;
+    if (!media || window.scrollY > window.innerHeight * 1.2) return;
+    media.style.transform = `translate3d(0, ${window.scrollY * 0.3}px, 0)`;
+  });
 
   return (
-    <section id="home" className="hero">
-      <div className="hero-bg" aria-hidden="true">
-        <img
-          src={heroImageSources[heroImageIndex]}
-          alt=""
-          loading="eager"
-          fetchPriority="high"
-          decoding="async"
-          onError={heroImageIndex < heroImageSources.length - 1 ? handleHeroImageError : undefined}
-        />
+    <section id="home" className="hero" data-theme="dark">
+      <div className="hero-media" ref={mediaRef} aria-hidden="true">
+        <picture>
+          <source srcSet={asset('merc.avif')} type="image/avif" />
+          <img src={asset('site/hero.jpg')} alt="" fetchPriority="high" decoding="async" />
+        </picture>
       </div>
-      <div className="hero-overlay"></div>
-      <div className="container">
-        <div className="hero-content">
-          <h1 className="hero-title">Quality Parts, Reliable Service</h1>
-          <p className="hero-subtitle">Your trusted partner for industrial and automotive supply solutions across South Africa</p>
-          <div className="hero-stats">
-            <div className="stat-item">
-              <i className="fas fa-award"></i>
-              <h3>B-BBEE Level 1</h3>
-              <p>Contributor</p>
-            </div>
-            <div className="stat-item">
-              <i className="fas fa-users"></i>
-              <h3>100% Owned</h3>
-              <p>Youth, Woman & Black</p>
-            </div>
-            <div className="stat-item">
-              <i className="fas fa-truck"></i>
-              <h3>Comprehensive</h3>
-              <p>Supply Solutions</p>
-            </div>
-          </div>
-          <div className="hero-cta">
-            <a href="#contact" className="btn btn-primary">Request a Quote</a>
-            <a href="#about" className="btn btn-secondary">Learn More</a>
-          </div>
+      <div className="hero-shade" aria-hidden="true"></div>
+
+      <div className="container hero-inner">
+        <h1 className="hero-title">
+          <span className="line-mask"><span style={{ '--i': 0 }}>Quality Parts,</span></span>
+          <span className="line-mask"><span style={{ '--i': 1 }}>Reliable Service<span className="accent-dot">.</span></span></span>
+        </h1>
+
+        <div className="hero-aside">
+          <p>
+            Your trusted partner for industrial and automotive supply solutions across South Africa.
+          </p>
+          <a href="#products" className="btn btn-accent">
+            <RollText>Explore Products</RollText>
+          </a>
         </div>
       </div>
     </section>

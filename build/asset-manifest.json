@@ -1,13 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.c4f685d6.css",
-    "main.js": "/static/js/main.221ea10b.js",
+    "main.css": "/static/css/main.ec3fc263.css",
+    "main.js": "/static/js/main.8bd3d99a.js",
+    "static/media/geist-latin-wght-normal.woff2": "/static/media/geist-latin-wght-normal.ee5d167b615cdb197f4a.woff2",
+    "static/media/geist-mono-latin-wght-normal.woff2": "/static/media/geist-mono-latin-wght-normal.8915f32bc9d51b44d11a.woff2",
+    "static/media/michroma-latin-400-normal.woff2": "/static/media/michroma-latin-400-normal.51ae0d3d735eb30a8783.woff2",
+    "static/media/geist-latin-ext-wght-normal.woff2": "/static/media/geist-latin-ext-wght-normal.b29dbc4234e76289a5b9.woff2",
+    "static/media/geist-cyrillic-wght-normal.woff2": "/static/media/geist-cyrillic-wght-normal.e1e85cd9eab54096528f.woff2",
+    "static/media/geist-mono-latin-ext-wght-normal.woff2": "/static/media/geist-mono-latin-ext-wght-normal.62a3bc4f669903381d47.woff2",
+    "static/media/michroma-latin-400-normal.woff": "/static/media/michroma-latin-400-normal.58fdebe0c32c76e95b58.woff",
+    "static/media/michroma-latin-ext-400-normal.woff2": "/static/media/michroma-latin-ext-400-normal.84eccbe06133a1c7e3f3.woff2",
+    "static/media/geist-mono-cyrillic-wght-normal.woff2": "/static/media/geist-mono-cyrillic-wght-normal.3f8363306daa9a51bc69.woff2",
+    "static/media/michroma-latin-ext-400-normal.woff": "/static/media/michroma-latin-ext-400-normal.7ed12cf51934b0cad8c2.woff",
+    "static/media/geist-vietnamese-wght-normal.woff2": "/static/media/geist-vietnamese-wght-normal.ed8ddc5c3f2df573fa57.woff2",
+    "static/media/geist-mono-vietnamese-wght-normal.woff2": "/static/media/geist-mono-vietnamese-wght-normal.7da6d79fa235f24f2930.woff2",
+    "static/media/geist-cyrillic-ext-wght-normal.woff2": "/static/media/geist-cyrillic-ext-wght-normal.141916beb91c487496c8.woff2",
+    "static/media/geist-mono-cyrillic-ext-wght-normal.woff2": "/static/media/geist-mono-cyrillic-ext-wght-normal.69fc1fa0544d8241186e.woff2",
+    "static/media/geist-mono-symbols2-wght-normal.woff2": "/static/media/geist-mono-symbols2-wght-normal.2d848fc9308af046051c.woff2",
     "index.html": "/index.html",
-    "main.c4f685d6.css.map": "/static/css/main.c4f685d6.css.map",
-    "main.221ea10b.js.map": "/static/js/main.221ea10b.js.map"
+    "main.ec3fc263.css.map": "/static/css/main.ec3fc263.css.map",
+    "main.8bd3d99a.js.map": "/static/js/main.8bd3d99a.js.map"
   },
   "entrypoints": [
-    "static/css/main.c4f685d6.css",
-    "static/js/main.221ea10b.js"
+    "static/css/main.ec3fc263.css",
+    "static/js/main.8bd3d99a.js"
   ]
 }

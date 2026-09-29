@@ -1,45 +1,51 @@
 import React from 'react';
+import { Reveal } from '../lib/motion';
+import { asset } from '../data/company';
+
+const features = [
+  {
+    tag: 'Quality',
+    title: 'Quality Assurance',
+    desc: 'Every product undergoes rigorous quality control. We only supply parts that meet or exceed industry standards, ensuring your equipment runs reliably.',
+    image: asset('site/why-quality.jpg')
+  },
+  {
+    tag: 'B-BBEE Level 1',
+    title: 'Empowering Suppliers',
+    desc: "As a B-BBEE Level 1 contributor and 100% youth, woman, and black-owned company, we're committed to economic transformation and supplier empowerment.",
+    image: asset('site/why-empowerment.jpg')
+  },
+  {
+    tag: 'Partnership',
+    title: 'Long-Term Partnerships',
+    desc: 'We focus on building lasting relationships with our clients, understanding your needs, and growing together through mutual support and trust.',
+    image: asset('site/why-partnership.jpg')
+  }
+];
 
 function WhyChooseUs() {
-  const features = [
-    {
-      icon: 'award',
-      title: 'Quality Assurance',
-      desc: 'Every product undergoes rigorous quality control. We only supply parts that meet or exceed industry standards, ensuring your equipment runs reliably.'
-    },
-    {
-      icon: 'hands-helping',
-      title: 'Empowering Suppliers',
-      desc: 'As a B-BBEE Level 1 contributor and 100% youth, woman, and black-owned company, we\'re committed to economic transformation and supplier empowerment.'
-    },
-    {
-      icon: 'handshake',
-      title: 'Long-Term Partnerships',
-      desc: 'We focus on building lasting relationships with our clients, understanding your needs, and growing together through mutual support and trust.'
-    },
-    // {
-    //   icon: 'user-tie',
-    //   title: 'Industry Specialists',
-    //   desc: 'Our team brings deep expertise in industrial and automotive sectors, providing expert advice and solutions tailored to your specific requirements.'
-    // }
-  ];
-
   return (
-    <section id="why-choose" className="why-choose">
+    <section id="why-choose" className="why">
       <div className="container">
-        <div className="section-header">
-          <h2>Why Choose Us</h2>
-          <p>Your partner for excellence and reliability</p>
-        </div>
-        <div className="features-grid">
-          {features.map((feature, index) => (
-            <div className="feature-card" key={index}>
-              <div className="feature-icon">
-                <i className={`fas fa-${feature.icon}`}></i>
+        <header className="section-head section-head-center">
+          <Reveal as="p" variant="fade" className="eyebrow">Why Choose Us</Reveal>
+          <Reveal as="h2" className="section-title" delay={80}>
+            Quality, Empowerment &amp;
+            <br />
+            Partnerships That Last.
+          </Reveal>
+        </header>
+
+        <div className="why-grid">
+          {features.map((feature, i) => (
+            <Reveal as="article" className="why-card" delay={i * 110} key={feature.title}>
+              <div className="why-media">
+                <img src={feature.image} alt="" loading="lazy" decoding="async" />
+                <span className="media-chip">{feature.tag}</span>
               </div>
               <h3>{feature.title}</h3>
               <p>{feature.desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
